@@ -46,3 +46,7 @@ def remove_duplicates(Dates,Values):
     sorted_dates, sorted_values = zip(*sorted_data)
     return sorted_dates,sorted_values
 
+#先计算最大值图片的平均最大值
+def ndvi_meanMax(image):
+    mean = image.reduceRegion(reducer=ee.Reducer.mean(), scale=30, maxPixels=1e9)#计算所有波段的平均值
+    return image.set('meanNDVI', mean.get('NDVI'))
